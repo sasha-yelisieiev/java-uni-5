@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<head>
+    <title>JSF - Mega Cool Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            width: 300px;
+        }
+
+        .error {
+            color: #ff6b6b;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="submit"], .navigation a {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.1em;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover, .navigation a:hover {
+            background-color: #45a049;
+        }
+
+        .navigation {
+            margin-top: 30px;
+        }
+
+        .navigation a {
+            display: inline-block;
+            margin: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .time {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        // JavaScript для відображення та оновлення поточного часу
+        function startClock() {
+            function updateClock() {
+                var now = new Date();
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var seconds = now.getSeconds();
+
+                // Додаємо 0, якщо число менше 10
+                if (hours &lt; 10) hours = "0" + hours;
+                if (minutes &lt; 10) minutes = "0" + minutes;
+                if (seconds &lt; 10) seconds = "0" + seconds;
+
+                var currentTime = hours + ":" + minutes + ":" + seconds;
+                document.getElementById('liveTime').textContent = currentTime;
+            }
+            updateClock(); // Оновлюємо час відразу після завантаження
+            setInterval(updateClock, 1000); // Оновлюємо щосекунди
+        }
+    </script>
+</head>
+<body onload="startClock()">
+<div class="container">
+    <h1>Welcome to page OLEKSANDR !</h1>
+
+    <h2>Current Date and Time</h2>
+    <p>The current time is: <span id="liveTime"></span></p>
+
+    <h2>Set and Get Variable</h2>
+    <p>Current value of message: <strong><h:outputText value="#{variableBean.message}" /></strong></p>
+
+
+
+    <h:form>
+        <h:outputLabel for="message" value="Enter new message: " />
+        <h:inputText id="message" value="#{variableBean.message}" required="true">
+            <f:validator validatorId="customLengthValidator" />
+        </h:inputText>
+        <h:message for="message" styleClass="error" />
+        <br/>
+        <h:commandButton value="Submit" action="#{variableBean.updateMessage()}" />
+    </h:form>
+
+    <nav>
+        <h2>Navigate to:</h2>
+        <a href="hello-servlet" class="btn">Hello Servlet</a>
+        <a href="first-servlet" class="btn">First Servlet</a>
+        <a href="second-servlet" class="btn">Second Servlet</a>
+        <a href="third-servlet" class="btn">Third Servlet</a>
+        <a href="fourth-servlet" class="btn">Fourth Servlet</a>
+    </nav>
+</div>
+</body>
+</html>
